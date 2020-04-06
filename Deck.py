@@ -1,5 +1,6 @@
 from Card import Card
-from random import shuffle
+from random import shuffle, sample
+from Hand import Hand
 
 class Deck:
     suits = ['♠', '♥', '♣', '♦']
@@ -20,10 +21,17 @@ class Deck:
         return deck.strip()
 
     def deal(self, numberOfCards):
-        return random.sample(self.cards, numberOfCards)
+        return sample(self.cards, numberOfCards)
+
+    def deal_hand(self, numberOfCards):
+        currentHand = Hand()
+        currentHand.addCards(sample(self.cards, numberOfCards))
+        return currentHand
 
 if __name__=='__main__':
     deck = Deck()
     print(deck)
 
+    print(deck.deal(5))
 
+    print(deck.deal_hand(13))
