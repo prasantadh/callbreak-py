@@ -8,7 +8,12 @@ class CallBreak(CardGame):
         self.totalRound=5
         self.currentRound=0
 
-    def getCurrentRound
+    def play(self):
+        # for total number of rounds
+        #   scores = Round.play()
+        #   process the scores
+        # endgame
+        pass
 
 if __name__=='__main__':
     game = CardGame('CallBreak')
