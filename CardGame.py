@@ -1,7 +1,7 @@
 from Deck import Deck
 
 class CardGame:
-    def __init__(self, numberOfRounds, name='generic'):
+    def __init__(self, numberOfRounds=1, name='generic'):
         self.name = name
         self.players = []
         self.numberOfRounds=numberOfRounds
