@@ -12,6 +12,13 @@ class Deck:
 
     def __init__(self):
         shuffle(self.cards)
+        # TODO: Add rules to ensure shuffle valid per callbreak rules
+
+    def shuffle(self):
+        shuffle(self.cards)
+
+    def __getitem__(self, key):
+        return self.cards[key]
 
     def __str__(self):
         deck = ''
