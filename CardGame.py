@@ -1,9 +1,10 @@
 from Deck import Deck
 
 class CardGame:
-    def __init__(self, name='generic'):
+    def __init__(self, numberOfRounds, name='generic'):
         self.name = name
         self.players = []
+        self.numberOfRounds=numberOfRounds
 
     def addPlayer(self, player):
         self.players.append(player)
@@ -14,5 +15,3 @@ class CardGame:
 if __name__=='__main__':
     game = CardGame()
     print(game)
-
-
