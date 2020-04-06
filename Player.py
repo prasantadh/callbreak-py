@@ -14,6 +14,12 @@ class Player:
     def getHand(self):
         return self.hand
 
+    
+
+
+# play hand
+# number of winning hands
+# 
 
 if __name__ == '__main__':
     player = Player('Player 1')

@@ -19,6 +19,9 @@ class Deck:
             deck = deck + '({}{}) '.format(card.suit, card.rank)
         return deck.strip()
 
+    def deal(self, numberOfCards):
+        return random.sample(self.cards, numberOfCards)
+
 if __name__=='__main__':
     deck = Deck()
     print(deck)
