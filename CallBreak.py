@@ -3,7 +3,8 @@ from CardGame import CardGame
 class CallBreak(CardGame):
     def __init__(self):
         super().init()
-        totalRound=5
+        name="CallBreak"
+        numberOfRounds=5
         currentRound=0
 
 if __name__=='__main__':
