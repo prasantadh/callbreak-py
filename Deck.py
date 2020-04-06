@@ -1,6 +1,7 @@
 from Card import Card
 from random import shuffle, sample
 from Hand import Hand
+from utilities import sorting_card_keyy
 
 class Deck:
     suits = ['♠', '♥', '♣', '♦']
@@ -15,9 +16,10 @@ class Deck:
         shuffle(self.cards)
 
     def __str__(self):
+        self.sort()
         deck = ''
         for card in self.cards:
-            deck = deck + '({}{}) '.format(card.suit, card.rank)
+            deck = deck + '({} {}) '.format(card.suit, card.rank)
         return deck.strip()
 
     def deal(self, numberOfCards):
@@ -28,10 +30,23 @@ class Deck:
         currentHand.addCards(sample(self.cards, numberOfCards))
         return currentHand
 
+    def sort(self):
+        self.cards = sorted(self.cards, key=sorting_card_keyy, reverse=True)
+
 if __name__=='__main__':
     deck = Deck()
+
     print(deck)
 
-    print(deck.deal(5))
+    a = deck.deal_hand(13)
+    
+    print(a)
 
-    print(deck.deal_hand(13))
+    a.sort()
+
+    print(a)
+
+
+    a.sort()
+
+    print(a)
