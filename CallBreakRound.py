@@ -9,6 +9,11 @@ class CallBreakRound(Round):
         self._playerScore=[0,0,0,0]
 
     def runRound(self):
+        for i in range(0, self.totalPlays):
+            # initialize play, set it to self.currentPlay
+            # run Play
+            # get winner
+            self.currentPlayNum+=1
         pass
         #returns self.getFinalScore
 
