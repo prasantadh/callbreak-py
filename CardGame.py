@@ -4,6 +4,7 @@ class CardGame:
     def __init__(self, numberOfRounds=1, name='generic'):
         self.name = name
         self.players = []
+        self.numberOfPlayers = 1
         self.numberOfRounds=numberOfRounds
 
     def addPlayer(self, player):
