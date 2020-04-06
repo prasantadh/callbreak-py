@@ -13,4 +13,9 @@ class Round:
         pass
 
     def runRound(self):
+        for i in range(0, self.totalPlays):
+            # initialize play, set it to self.currentPlay
+            # run Play
+            # get winner
+            self.currentPlayNum+=1
         pass
