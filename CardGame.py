@@ -1,14 +1,15 @@
 from Deck import Deck
 
 class CardGame:
-    def __init__(self):
-        players = []
+    def __init__(self, name='generic'):
+        self.name = name
+        self.players = []
 
     def addPlayer(self, player):
-        players.append(player)
+        self.players.append(player)
 
     def __str__(self):
-        return 'The game is on!'
+        return 'The {} game is on!'.format(self.name)
 
 if __name__=='__main__':
     game = CardGame()
