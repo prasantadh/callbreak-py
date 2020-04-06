@@ -7,6 +7,7 @@ class Round:
         self.totalPlays=totalPlays
         self.currentPlayNum=0
         self.currrentPlay=None
+        
 
 
     def findDealer(self, startingDealer, roundNum, playersSeating):
