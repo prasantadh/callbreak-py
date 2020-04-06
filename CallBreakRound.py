@@ -1,9 +1,8 @@
-from Round import Round
+class CallBreakRound:
 
-class CallBreakRound(Round):
-
-    def __init__():
-        super.__init__(roundNum, 4, seating, startDealer, 13)
+    def __init__(self, orderdPlayers, deck):
+        self.players=orderedPlayers #first player starts the round
+        self.shuffledDeck=deck
         self._playersBid=[0,0,0,0]
         self._playersHandsWon=[0,0,0,0]
         self._playerScore=[0,0,0,0]
@@ -12,7 +11,7 @@ class CallBreakRound(Round):
         for i in range(0, self.totalPlays):
             # initialize play, set it to self.currentPlay
             # run Play
-            # get winner
+            #
             self.currentPlayNum+=1
         pass
         #returns self.getFinalScore
