@@ -31,6 +31,10 @@ class Deck:
         return currentHand
 
     def sort(self):
+        """
+        Sort the current deck such that all ranks are in descending order
+        and the suits are in the order ♠, ♥, ♣, ♦.
+        """
         self.cards = sorted(self.cards, key=sorting_card_keyy, reverse=True)
 
 if __name__=='__main__':
