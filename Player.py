@@ -4,6 +4,7 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.hand = Hand()
+        self.score = 0
 
     def __str__(self):
         return self.name
@@ -14,12 +15,12 @@ class Player:
     def getHand(self):
         return self.hand
 
-    
+
 
 
 # play hand
 # number of winning hands
-# 
+#
 
 if __name__ == '__main__':
     player = Player('Player 1')
