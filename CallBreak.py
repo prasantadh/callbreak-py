@@ -4,7 +4,7 @@ class CallBreak(CardGame):
     numberOfPlayers = 4
 
     def __init__(self):
-        super().__init__('CallBreak')
+        super().__init__(name='CallBreak')
         self.totalRound=5
         self.currentRound=0
 
@@ -16,5 +16,5 @@ class CallBreak(CardGame):
         pass
 
 if __name__=='__main__':
-    game = CardGame('CallBreak')
+    game = CallBreak()
     print(game)
