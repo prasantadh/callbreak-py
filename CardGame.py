@@ -6,6 +6,7 @@ class CardGame:
         self.players = []
         self.numberOfPlayers = 1
         self.numberOfRounds=numberOfRounds
+        self.deck = Deck()
 
     def addPlayer(self, player):
         self.players.append(player)

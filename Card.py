@@ -1,17 +1,17 @@
 class Card:
 
     """Summary
-    
+
     Attributes:
         faceRanks (dict): Description
         played (bool): Description
         rank (TYPE): Description
         suit (TYPE): Description
     """
-    
+
     def __init__(self, suit, rank):
         """Summary
-        
+
         Args:
             suit (TYPE): Description
             rank (TYPE): Description
@@ -26,7 +26,7 @@ class Card:
         Returns string representation of Card.
         For a card that has already been played,
         it prints with a strikethrough, underline, and overline.
-        
+
         Returns:
             str: string representation of current Card.
         """
@@ -39,8 +39,8 @@ class Card:
 
     def __repr__(self):
         """
-        Creating a string representation of current Card. 
-        
+        Creating a string representation of current Card.
+
         Returns:
             TYPE: String showing suit and rank. Example, ♠ 4.
         """
@@ -53,9 +53,9 @@ class Card:
 
         Args:
             otherCard (Card): Another Card to compare with.
-        
+
         Returns:
-            Bool: Returns true if the rank of the other card 
+            Bool: Returns true if the rank of the other card
             is less than the rank of the current card.
         """
         return self.getRankValue() < otherCard.getRankValue()
@@ -64,10 +64,10 @@ class Card:
         """
         Overloads the equality (and inequality) operator.
         Allows to compare the ranks of two cards.
-        
+
         Args:
             otherCard (Card): Another card to compare current card with.
-        
+
         Returns:
             Bool: True if the ranks of self and otherCard are equal.
         """
@@ -78,7 +78,7 @@ class Card:
     def getRankValue(self):
         """
         Return the numeric (int) value of the rank of current card.
-        
+
         Returns:
             int: Rank value of current card. J = 11; Q = 12; K = 13;
             A = 14;
@@ -87,7 +87,7 @@ class Card:
             return self.faceRanks[self.rank]
         else:
             return int(self.rank)
-    
+
 if __name__=='__main__':
     # card = Card('Hukum-ko-','Ekka')
     print(card)
@@ -101,7 +101,7 @@ if __name__=='__main__':
     print(Card('♠','4'))
 
 
-    
+
 
 
 
