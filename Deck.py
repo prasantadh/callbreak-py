@@ -1,28 +1,23 @@
 from Card import Card
 from random import shuffle, sample
 from Hand import Hand
-from utilities import sorting_card_keyy
+from Suit import Suit
+from Rank import Rank
 
 class Deck:
-    suits = ['♠', '♥', '♣', '♦']
-    ranks = ['A', 'J', 'Q', 'K'] + [str(i) for i in range(2, 11)]
-
-    cards = []
-    for suit in suits:
-        for rank in ranks:
-            cards.append(Card(suit, rank))
 
     def __init__(self):
-        shuffle(self.cards)
-        # TODO: Add rules to ensure shuffle valid per callbreak rules
+        self.cards = []
+        for suit in Suit:
+            for rank in Rank:
+                self.cards.append(Card(suit, rank))
+        # self.shuffle()
 
     def shuffle(self):
         shuffle(self.cards)
 
-    def __getitem__(self, key):
-        return self.cards[key]
-
     def __str__(self):
+        self.shuffle()
         self.sort()
         deck = ''
         for card in self.cards:
@@ -42,22 +37,8 @@ class Deck:
         Sort the current deck such that all ranks are in descending order
         and the suits are in the order ♠, ♥, ♣, ♦.
         """
-        self.cards = sorted(self.cards, key=sorting_card_keyy, reverse=True)
+        self.cards = sorted(self.cards, key=lambda card: (card.suit, card.rank), reverse=True)
 
 if __name__=='__main__':
     deck = Deck()
-
     print(deck)
-
-    a = deck.deal_hand(13)
-    
-    print(a)
-
-    a.sort()
-
-    print(a)
-
-
-    a.sort()
-
-    print(a)

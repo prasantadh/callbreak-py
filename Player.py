@@ -5,9 +5,13 @@ class Player:
         self.name = name
         self.hand = Hand()
         self.score = 0
+        self.cards = []
 
     def __str__(self):
         return self.name
+
+    def addCard(self, card):
+        self.cards.append(card)
 
     def setHand(self, hand):
         self.hand = hand

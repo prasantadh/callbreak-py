@@ -9,6 +9,10 @@ class CallBreak(CardGame):
         self.currentRound=0
 
     def play(self):
+        print(self.deck)
+        for player in self.players:
+            player.addCard
+            print(player)
         # for total number of rounds
         #   scores = Round.play()
         #   process the scores
