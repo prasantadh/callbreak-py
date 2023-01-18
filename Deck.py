@@ -11,26 +11,20 @@ class Deck:
         for suit in Suit:
             for rank in Rank:
                 self.cards.append(Card(suit, rank))
-        # self.shuffle()
+        self.shuffle()
 
     def shuffle(self):
         shuffle(self.cards)
 
     def __str__(self):
-        self.shuffle()
         self.sort()
         deck = ''
         for card in self.cards:
             deck = deck + '({} {}) '.format(card.suit, card.rank)
         return deck.strip()
 
-    def deal(self, numberOfCards):
-        return sample(self.cards, numberOfCards)
-
-    def deal_hand(self, numberOfCards):
-        currentHand = Hand()
-        currentHand.addCards(sample(self.cards, numberOfCards))
-        return currentHand
+    def deal(self):
+        return self.cards.pop()
 
     def sort(self):
         """

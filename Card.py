@@ -30,7 +30,7 @@ class Card:
         Returns:
             str: string representation of current Card.
         """
-        str_rep = self.suit + " " + self.rank
+        str_rep = "{} {}".format(self.suit, self.rank)
 
         if self.played:
             return '\u0305\u0332\u0336'.join(str_rep) + '\u0336\u0332\u0305'

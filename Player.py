@@ -8,7 +8,7 @@ class Player:
         self.cards = []
 
     def __str__(self):
-        return self.name
+        return "{} : {}".format(self.name, self.cards)
 
     def addCard(self, card):
         self.cards.append(card)
