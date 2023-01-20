@@ -7,3 +7,5 @@ game = CallBreak()
 for player in players:
     game.addPlayer(player)
 game.play()
+
+game.render()
