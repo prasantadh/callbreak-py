@@ -51,7 +51,8 @@ class CardGame:
     def render(self):
         print("Rendering")
         self.renderer.update_players(self.players)
-        self.renderer.render_call_break()
+        # self.renderer.render_call_break()
+        self.renderer.render_live()
 
 
 if __name__ == '__main__':
