@@ -39,6 +39,17 @@ class Player:
             card -- _description_
         """
         self.cards.append(card)
+    
+    def getNumberOfRemainingCards(self) -> bool:
+        """
+        getNumberOfRemainingCards Return the number of yet-unplayed cards.
+
+        _extended_summary_
+
+        Returns:
+            Numbre of cards that haven't been played yet.
+        """
+        return sum([not card.played for card in self.cards])
 
     def setHand(self, hand: Hand):
         """
@@ -62,7 +73,7 @@ class Player:
         """
         return self.hand
 
-    def getCards(self) -> list[Card]:
+    def getCards(self):
         """
         getCards _summary_
 
@@ -82,7 +93,7 @@ class Player:
         Keyword Arguments:
             ascending -- _description_ (default: {True})
         """
-        self.cards = sorted(self.cards, key=lambda card: (card.suit.value, card.rank.value), reverse=not ascending)
+        self.cards = sorted([card for card in self.cards if not card.played], key=lambda card: (card.suit.value, card.rank.value), reverse=not ascending)
 
 
 # play hand

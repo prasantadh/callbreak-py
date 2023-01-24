@@ -6,7 +6,7 @@ from rich.panel import Panel
 from rich.align import Align
 
 from rich import print
-
+from rich.padding import Padding
 
 class Card:
 
@@ -189,7 +189,7 @@ class Card:
         """
         return self.rank
     
-    def rich_render(self) -> Panel:
+    def rich_render(self, up: bool = False) -> Panel:
         """
         rich_render 
         Uses the rich library to produce "rich"
@@ -207,10 +207,11 @@ class Card:
 
         # Use a table to draw the card.
         table = Table(title="",
-                    show_lines=False,
-                    show_header=False,
-                    expand=True
+                            show_lines=False,
+                            show_header=False,
+                            expand=True
                     )
+
         table.add_column("X", justify="right", style="cyan", no_wrap=False)
 
         # Want the card to be empty for now.
@@ -230,10 +231,15 @@ class Card:
 
         layout['upper'].size = 1
 
-        return Panel(layout, width=8, height=6)
+        if up:
+            pad = 0
+        else:
+            pad = 1
+
+        return Padding(Panel(layout, width=8, height=6), (pad, 0, 0, 0), expand=False)
 
 
 if __name__ == '__main__':
 
     card = Card(Suit.Paan, Rank.Dahar)
-    print(card.rich_render())
+    print(card.rich_render(False))

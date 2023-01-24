@@ -17,7 +17,7 @@ def sorting_card_keyy(x):
     return suit_values[x.suit] + x.getRankValue()
 
 
-def render_empty_card(for_across_a_row: bool = True, color: str = "white", text: str = " ") -> Panel:
+def render_empty_card(for_across_a_row: bool = True, color: str = "white", text: str = " ", width: int = 6, height: int = 4) -> Panel:
     """
     render_empty_card 
     Renders an empty card for "other" players.
@@ -32,6 +32,8 @@ def render_empty_card(for_across_a_row: bool = True, color: str = "white", text:
         text -- any text we might want on the back of
         the card. Currently using random stuff like dragons
         and comets. (default: {" "})
+        width: width of card
+        heigh: height of card
 
     Returns:
         _description_
@@ -42,11 +44,9 @@ def render_empty_card(for_across_a_row: bool = True, color: str = "white", text:
         layout.split_column(
             Layout(text, name="upper"),
         )
-        width, height = 6, 4
     else:
         layout.split_row(
             Layout(text, name="upper")
         )
-        width, height = 6, 4
 
     return Panel(layout, width=width, height=height, style=color)
