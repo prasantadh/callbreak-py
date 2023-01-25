@@ -1,0 +1,8 @@
+evdev==1.6.1
+markdown-it-py==2.1.0
+mdurl==0.1.2
+Pygments==2.14.0
+pynput==1.7.6
+python-xlib==0.33
+rich==13.2.0
+six==1.16.0
