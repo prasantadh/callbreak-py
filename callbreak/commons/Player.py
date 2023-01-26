@@ -1,5 +1,5 @@
-from Hand import Hand
-from Card import Card
+from .Card import Card
+from .Hand import Hand
 
 
 class Player:
@@ -39,7 +39,7 @@ class Player:
             card -- _description_
         """
         self.cards.append(card)
-    
+
     def getNumberOfRemainingCards(self) -> bool:
         """
         getNumberOfRemainingCards Return the number of yet-unplayed cards.

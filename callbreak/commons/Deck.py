@@ -1,6 +1,6 @@
-from Card import Card
-from Suit import Suit
-from Rank import Rank
+from .Card import Card
+from .Suit import Suit
+from .Rank import Rank
 from random import shuffle as random_shuffle
 
 
@@ -64,6 +64,8 @@ class Deck:
         """
         self.cards = sorted(self.cards, key=lambda card: (card.suit.value, card.rank.value), reverse=True)
 
+    def empty(self):
+        return len(self.cards) == 0
 
 if __name__ == '__main__':
     deck = Deck()

@@ -1,5 +1,5 @@
-from Rank import Rank
-from Suit import Suit
+from . import Rank
+from . import Suit
 from rich.table import Table
 from rich.layout import Layout
 from rich.panel import Panel
@@ -57,7 +57,7 @@ class Card:
 
     def emojified_rep(self) -> str:
         """
-        emojified_rep Returns a string representation where the suit is a 
+        emojified_rep Returns a string representation where the suit is a
         Unicode emoji. This just looks nicer- that's all.
 
         _extended_summary_
@@ -74,7 +74,7 @@ class Card:
         rank = self.rank.get_alphabet_representation()
         # This is required because we represent 10 as T
         # in face_values in the render_fancy() method below.
-        # Enables to use a single string to define all ranks instead of a 
+        # Enables to use a single string to define all ranks instead of a
         # list with 13 values.
         if rank == "T":
             rank = "10"
@@ -133,7 +133,7 @@ class Card:
 
     def render_fancy(self, color: bool = True) -> str:
         """
-        render_fancy 
+        render_fancy
         This returns single unicode characters where each
         character shows both the rank and suit defined here:
         https://unicode-table.com/en/blocks/playing-cards/
@@ -188,10 +188,10 @@ class Card:
             _description_
         """
         return self.rank
-    
+
     def rich_render(self, up: bool = False) -> Panel:
         """
-        rich_render 
+        rich_render
         Uses the rich library to produce "rich"
         representations for cards where we basically draw
         a rectangle with suit and rank to make a card.
