@@ -1,5 +1,5 @@
-from CallBreak import CallBreak
-from Player import Player
+from callbreak.CallBreak import CallBreak
+from callbreak.commons.Player import Player
 
 players = [Player('1'), Player('2'), Player('3'), Player('4')]
 

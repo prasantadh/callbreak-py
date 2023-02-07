@@ -1,5 +1,5 @@
-from .Card import Card
-from .Hand import Hand
+from callbreak.commons.Card import Card
+from callbreak.commons.Hand import Hand
 
 
 class Player:

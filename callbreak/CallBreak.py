@@ -1,4 +1,5 @@
-from .commons.CardGame import CardGame
+from callbreak.commons.CardGame import CardGame
+from callbreak.commons.Player import Player
 
 class CallBreak(CardGame):
 
@@ -10,8 +11,8 @@ class CallBreak(CardGame):
         self.minPlayersAllowed = 4
 
         # for now add 3 players so that we only wait for one to join
-        for player in range(3):
-            self.addPlayer(str(player))
+        for player_idx in range(3):
+            self.addPlayer(Player(str(player_idx)))
 
     def play(self):
         if len(self.players) != self.minPlayersAllowed:

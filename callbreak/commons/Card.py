@@ -1,5 +1,5 @@
-from . import Rank
-from . import Suit
+from callbreak.commons.Rank import Rank
+from callbreak.commons.Suit import Suit
 from rich.table import Table
 from rich.layout import Layout
 from rich.panel import Panel
@@ -32,7 +32,7 @@ class Card:
         self.faceRanks = {'A': 14, 'K': 13, 'Q': 12, 'J': 11}
         self.played = False
         # This is for coloring the text representations of each card's suit.
-        self.suit_colors = ["\x1b[30m", "\x1b[31m"]   # Gray (for black) & red.
+        self.suit_colors = ["\x1b[37m", "\x1b[31m"]   # Gray (for black) & red.
 
     def __str__(self) -> str:
         """

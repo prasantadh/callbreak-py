@@ -1,6 +1,6 @@
 # callbreak
 
-To run the server
+When you are on the topmost level, to run the server
 
 ```bash
 flask --app callbreak --debug run

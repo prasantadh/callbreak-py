@@ -1,6 +1,6 @@
-from .Deck import Deck
-from .Player import Player
-# from Renderer import Renderer
+from callbreak.commons.Deck import Deck
+from callbreak.commons.Player import Player
+from Renderer import Renderer
 
 
 class CardGame:
@@ -22,13 +22,13 @@ class CardGame:
         self.name = name
         self.players = []   # TODO: Assume self.players[0] one is always self?
         self.numberOfPlayers = 1
-        self.maxPlayersAllowed = 1
+        self.maxPlayersAllowed = 4
         self.minPlayersAllowed = 1
         self.numberOfRounds = numberOfRounds
         self.deck = Deck()
-        # self.renderer = Renderer()
+        self.renderer = Renderer()
 
-    def addPlayer(self, name: str):
+    def addPlayer(self, player: Player):
         """
         addPlayer _summary_
 
@@ -39,7 +39,7 @@ class CardGame:
         """
         if (len(self.players)) == self.maxPlayersAllowed:
             return False
-        self.players.append(Player(name))
+        self.players.append(player)
 
     def __str__(self):
         """
@@ -54,9 +54,9 @@ class CardGame:
 
     def render(self):
         print("Rendering")
-        # self.renderer.update_players(self.players)
+        self.renderer.update_players(self.players)
         # self.renderer.render_call_break()
-        # self.renderer.render_live()
+        self.renderer.render_live()
 
     def status(self):
         pass

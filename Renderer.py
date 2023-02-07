@@ -189,20 +189,20 @@ class Renderer():
             if self.should_render_card(1, i):
                 all_players_cards[1].append(render_empty_card(
                                                 for_across_a_row=False,
-                                                color="red",
-                                                text=":mahjong_red_dragon::mahjong_red_dragon:"
+                                                color="white",
+                                                text=":dragon::dragon:"
                                                 ))
             if self.should_render_card(2, i):
                 all_players_cards[2].append(render_empty_card(
                                                 for_across_a_row=True,
-                                                color="green",
+                                                color="white",
                                                 text=":dragon::dragon:"
                                                 ))
             if self.should_render_card(3, i):
                 all_players_cards[3].append(render_empty_card(
                                                 for_across_a_row=False,
-                                                color="blue",
-                                                text=":comet::comet:"
+                                                color="white",
+                                                text=":dragon::dragon:"
                                                 ))
 
         # Layout the screen into rows and columns.
