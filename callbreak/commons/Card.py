@@ -1,5 +1,5 @@
-from . import Rank
-from . import Suit
+from callbreak.commons.Rank import Rank
+from callbreak.commons.Suit import Suit
 from rich.table import Table
 from rich.layout import Layout
 from rich.panel import Panel
@@ -32,7 +32,7 @@ class Card:
         self.faceRanks = {'A': 14, 'K': 13, 'Q': 12, 'J': 11}
         self.played = False
         # This is for coloring the text representations of each card's suit.
-        self.suit_colors = ["\x1b[30m", "\x1b[31m"]   # Gray (for black) & red.
+        self.suit_colors = ["\x1b[37m", "\x1b[31m"]   # Gray (for black) & red.
 
     def __str__(self) -> str:
         """
@@ -44,16 +44,7 @@ class Card:
         Returns:
             str: string representation of current Card.
         """
-        str_rep = "{} {}".format(self.suit, self.rank.value)
-        # Red if 0, 2. Black if 1, 3.
-        color_str = self.suit_colors[((self.suit.get_value() - 1) % 2) == 0]
-        color_str_terminal_char = "\x1b[0m"
-
-        if self.played:
-            # Unicode characters for strikethrough, underline, and overline.
-            return '\u0305\u0332\u0336'.join(str_rep) + '\u0336\u0332\u0305'
-        else:
-            return f"{color_str}{str_rep}{color_str_terminal_char}"
+        return f"{self.suit.get_descriptive_name()} {self.rank.get_alphabet_representation()}"
 
     def emojified_rep(self) -> str:
         """
@@ -87,7 +78,16 @@ class Card:
         Returns:
             TYPE: String showing suit and rank. Example, ♠ 4.
         """
-        return str(self)
+        str_rep = "{} {}".format(self.suit, self.rank.value)
+        # Red if 0, 2. Black if 1, 3.
+        color_str = self.suit_colors[((self.suit.get_value() - 1) % 2) == 0]
+        color_str_terminal_char = "\x1b[0m"
+
+        if self.played:
+            # Unicode characters for strikethrough, underline, and overline.
+            return '\u0305\u0332\u0336'.join(str_rep) + '\u0336\u0332\u0305'
+        else:
+            return f"{color_str}{str_rep}{color_str_terminal_char}"
 
     def __lt__(self, otherCard) -> bool:
         """
@@ -130,6 +130,18 @@ class Card:
             return self.faceRanks[self.rank]
         else:
             return int(self.rank)
+
+
+    def get_suit(self) -> Suit:
+        """
+        get_suit _summary_
+
+        _extended_summary_
+
+        Returns:
+            _description_
+        """
+        return self.suit
 
     def render_fancy(self, color: bool = True) -> str:
         """
@@ -178,7 +190,7 @@ class Card:
 
         return f"{color_str}{card_rep}{color_str_terminal_char}"
 
-    def get_rank(self) -> int:
+    def get_rank(self) -> Rank:
         """
         get_rank _summary_
 

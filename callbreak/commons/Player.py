@@ -1,5 +1,5 @@
-from .Card import Card
-from .Hand import Hand
+from callbreak.commons.Card import Card
+from callbreak.commons.Hand import Hand
 
 
 class Player:
@@ -83,6 +83,21 @@ class Player:
             _description_
         """
         return self.cards
+
+
+    def getCardFromIndex(self, index: int) -> Card:
+        """
+        getCardFromIndex _summary_
+
+        _extended_summary_
+
+        Arguments:
+            index -- _description_
+
+        Returns:
+            _description_
+        """
+        return self.cards[index]
 
     def sortCards(self, ascending: bool = True):
         """

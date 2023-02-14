@@ -1,6 +1,6 @@
-from .Card import Card
-from .Suit import Suit
-from .Rank import Rank
+from callbreak.commons.Card import Card
+from callbreak.commons.Suit import Suit
+from callbreak.commons.Rank import Rank
 from random import shuffle as random_shuffle
 
 

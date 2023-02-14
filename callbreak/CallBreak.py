@@ -1,4 +1,6 @@
-from .commons.CardGame import CardGame
+from callbreak.commons.CardGame import CardGame
+from callbreak.commons.Player import Player
+import json
 
 class CallBreak(CardGame):
 
@@ -10,8 +12,8 @@ class CallBreak(CardGame):
         self.minPlayersAllowed = 4
 
         # for now add 3 players so that we only wait for one to join
-        for player in range(3):
-            self.addPlayer(str(player))
+        for player_idx in range(3):
+            self.addPlayer(Player(str(player_idx)))
 
     def play(self):
         if len(self.players) != self.minPlayersAllowed:
@@ -22,8 +24,11 @@ class CallBreak(CardGame):
                 player.addCard(self.deck.deal())
 
     def status(self):
+
+        current_hand = ([str(c) for c in self.players[0].cards])
+
         status = { 'data' :
-                    { 'hand' : str(self.players[0].cards) }
+                    { 'hand' : json.dumps(current_hand) }
                   }
         return status
 

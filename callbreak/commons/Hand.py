@@ -1,4 +1,4 @@
-from . import Card
+from callbreak.commons.Card import Card
 
 class Hand:
     def __init__(self):

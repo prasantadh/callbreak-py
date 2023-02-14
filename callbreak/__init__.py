@@ -1,8 +1,15 @@
 import os
 from flask import Flask
 
-from .CallBreak import CallBreak
-from .commons.Player import Player
+
+# from CallBreak import CallBreak       # This imports the "player's" CallBreadk class instead.
+from callbreak.CallBreak import CallBreak
+from callbreak.commons.Player import Player
+
+
+# print(CallBreak)
+
+
 
 def create_app(test_config=None):
 
@@ -30,19 +37,27 @@ def create_app(test_config=None):
         try:
             return game.status()
         except Exception as err:
+            app.logger.error("Error retrieving status.")
+            app.logger.error(err)
             return { 'result' : 'failure' }
+            
+        return
 
     @app.route('/new/<name>', methods=['GET'])
     def new(name):
         global game
         try:
             game = CallBreak()
-            game.addPlayer(name)
+            game.addPlayer(Player(name))
             game.play()
+
+            app.logger.info(game.status())
             return {
                     'result' : 'success'
                     }
         except Exception as err:
+            app.logger.error("Error creating a new game.")
+            app.logger.error(err)
             print(err)
 
         return
