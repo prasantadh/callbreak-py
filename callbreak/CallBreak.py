@@ -1,5 +1,6 @@
 from callbreak.commons.CardGame import CardGame
 from callbreak.commons.Player import Player
+import json
 
 class CallBreak(CardGame):
 
@@ -23,8 +24,11 @@ class CallBreak(CardGame):
                 player.addCard(self.deck.deal())
 
     def status(self):
+
+        current_hand = ([str(c) for c in self.players[0].cards])
+
         status = { 'data' :
-                    { 'hand' : str(self.players[0].cards) }
+                    { 'hand' : json.dumps(current_hand) }
                   }
         return status
 

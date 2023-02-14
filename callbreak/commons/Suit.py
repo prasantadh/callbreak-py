@@ -38,7 +38,7 @@ class Suit(Enum):
         """
         return self.value < other.value
 
-    def __str__(self) -> bool:
+    def __str__(self) -> str:
         if self.value == 4:
             s = '♠'
         elif self.value == 3:
@@ -51,6 +51,33 @@ class Suit(Enum):
             raise Exception("ERROR: Unknown suite given.")
 
         return f"{suit_colors[self.value % 2]}{s}{color_str_terminal_char}"
+
+
+    def get_descriptive_name(self) -> str:
+        """
+        get_descriptive_name _summary_
+
+        _extended_summary_
+
+        Raises:
+            Exception: _description_
+
+        Returns:
+            _description_
+        """
+        if self.value == 4:
+            s = 'spade'
+        elif self.value == 3:
+            s = 'diamond'
+        elif self.value == 2:
+            s = 'club'
+        elif self.value == 1:
+            s = 'heart'
+        else:
+            raise Exception("ERROR: Unknown suite given.")
+
+        return s
+
 
     def get_value(self) -> int:
         return self.value

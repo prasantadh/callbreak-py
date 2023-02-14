@@ -7,11 +7,50 @@ from rich.live import Live
 from utilities import render_empty_card
 import random
 from pynput import keyboard
+from callbreak.commons.Card import Card
+import requests
+# import logging
 
 # In the future, could potentially use the same class for, say a HTML5/JS
 # version that uses the same backend.
 
 # console = Console()
+
+
+import logging
+import sys
+
+
+logger = logging.getLogger(__name__)
+
+# Create handlers
+
+f_handler = logging.FileHandler('renderer_log.log')
+f_handler.setLevel(logging.NOTSET)
+
+# Create formatters and add it to handlers
+f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+f_handler.setFormatter(f_format)
+
+# Add handlers to the logger
+logger.addHandler(f_handler)
+
+
+# Define hook to capture uncaught exceptions.
+def exception_hook(exc_type, exc_value, exc_traceback):
+    logger.error(
+        "Uncaught exception",
+        exc_info=(exc_type, exc_value, exc_traceback)
+    )
+
+
+sys.excepthook = exception_hook
+
+
+
+
+logger.warning('This is a warning')
+logger.error('This is an error')
 
 
 class Renderer():
@@ -30,6 +69,8 @@ class Renderer():
         self.highlighted_card = -1  # Which card is highlighted (to indicate the card that would be played next).
         self.number_of_cards_per_player = 13
 
+        self.server_address = "http://127.0.0.1:5000/"
+
         self.which_players_turn = 0
 
         # List where the jth element holds card player j played
@@ -37,6 +78,38 @@ class Renderer():
         self.card_index_played_on_current_hand = None
 
         self.quit_render = False
+
+
+    def play_card(self, card_idx: int) -> bool:
+        """
+        play_card _summary_
+
+        _extended_summary_
+
+        Arguments:
+            card -- _description_
+
+        Returns:
+            _description_ return bool; true for successful playing false if there is any error.
+        """
+
+        card = self.players[0].getCardFromIndex(card_idx)
+
+        card_rank = card.get_rank().get_alphabet_representation()
+        card_suit = card.get_suit().get_descriptive_name()
+
+        logger.error("Suit", card_suit)
+        logger.error("Rank", card_rank)
+
+        params = {'suit': card_suit, 'rank': card_rank}
+
+        r = requests.get(url=self.server_address, params=params)
+
+        response = r.json()
+
+        logger.debug(response)
+
+        return True
 
     def on_press(self, key):
         """
@@ -61,9 +134,23 @@ class Renderer():
                                         .getNumberOfRemainingCards())
         # Play the current card.
         elif key == keyboard.Key.enter:
+
+
+            logger.warn("Enter")
+            
+            try:
+                self.play_card(self.highlighted_card)
+            except Exception as e:
+                logger.error(e)
+
             if self.highlighted_card > -1:
-                self.card_index_played_on_current_hand[0] \
-                    = self.highlighted_card
+                
+                if self.play_card(self.highlighted_card):
+
+                    self.card_index_played_on_current_hand[0] \
+                        = self.highlighted_card
+                else:
+                    print("Playing given card failed!!!")
 
         self.live.update(self.render_call_break())
 
@@ -312,7 +399,7 @@ class Renderer():
         # print the overall layout.
         print(Padding(layout, (1, 2)))
 
-    def render_live(self):
+    def render_live(self, server_address: str):
         """
         render_live Render the board where we update it
         whenever something changes (like a card being
@@ -320,6 +407,9 @@ class Renderer():
 
         _extended_summary_
         """
+
+        logger.error("hey!")
+        self.server_address = server_address
 
         # Listener to listen for keyboard presses.
         listener = keyboard.Listener(

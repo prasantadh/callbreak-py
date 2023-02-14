@@ -52,11 +52,11 @@ class CardGame:
         """
         return 'The {} game is on!'.format(self.name)
 
-    def render(self):
+    def render(self, server_address: str=""):
         print("Rendering")
         self.renderer.update_players(self.players)
         # self.renderer.render_call_break()
-        self.renderer.render_live()
+        self.renderer.render_live(server_address)
 
     def status(self):
         pass

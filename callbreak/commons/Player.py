@@ -84,6 +84,21 @@ class Player:
         """
         return self.cards
 
+
+    def getCardFromIndex(self, index: int) -> Card:
+        """
+        getCardFromIndex _summary_
+
+        _extended_summary_
+
+        Arguments:
+            index -- _description_
+
+        Returns:
+            _description_
+        """
+        return self.cards[index]
+
     def sortCards(self, ascending: bool = True):
         """
         sortCards _summary_
