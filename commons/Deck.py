@@ -1,6 +1,6 @@
-from callbreak.commons.Card import Card
-from callbreak.commons.Suit import Suit
-from callbreak.commons.Rank import Rank
+from commons.Card import Card
+from commons.Suit import Suit
+from commons.Rank import Rank
 from random import shuffle as random_shuffle
 
 
@@ -41,10 +41,12 @@ class Deck:
             _description_
         """
         self.sort()
-        deck = ''
-        for card in self.cards:
-            deck = deck + '({} {}) '.format(card.suit, card.rank)
-        return deck.strip()
+        return ''.join('{}{}{}'.format(
+                                    card.suit,
+                                    card.rank,
+                                    '\n' if (idx + 1)  % 13 == 0 else '\t'
+                        )
+                       for idx, card in enumerate(self.cards))
 
     def deal(self):
         """
@@ -62,7 +64,9 @@ class Deck:
         Sort the current deck such that all ranks are in descending order
         and the suits are in the order ♠, ♥, ♣, ♦.
         """
-        self.cards = sorted(self.cards, key=lambda card: (card.suit.value, card.rank.value), reverse=True)
+        self.cards = sorted(self.cards,
+                            key=lambda card: (card.suit.value, card.rank.value),
+                            reverse=True)
 
     def empty(self):
         return len(self.cards) == 0

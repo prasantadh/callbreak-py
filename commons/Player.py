@@ -109,12 +109,3 @@ class Player:
             ascending -- _description_ (default: {True})
         """
         self.cards = sorted([card for card in self.cards if not card.played], key=lambda card: (card.suit.value, card.rank.value), reverse=not ascending)
-
-
-# play hand
-# number of winning hands
-#
-
-if __name__ == '__main__':
-    player = Player('Player 1')
-    print(player)
