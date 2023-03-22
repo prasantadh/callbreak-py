@@ -39,12 +39,13 @@ class Card:
             Bool: Returns true if the rank of the other card
             is less than the rank of the current card.
         """
-        if self.suit < otherCard.suit: 
-            return True
-        
-        
+        if self.suit == otherCard.suit: 
+            return self.rank < otherCard.rank
 
-        return self.getRankValue() < otherCard.getRankValue()
+        return False
+    
+    def __gt__(self, otherCard) -> bool:
+        return not self < otherCard
 
     def __eq__(self, otherCard) -> bool:
         """
@@ -58,7 +59,7 @@ class Card:
             Bool: True if the ranks of self and otherCard are equal.
         """
         if isinstance(otherCard, Card):
-            return self.rank == otherCard.rank
+            return self.suit == otherCard.suit and self.rank == otherCard.rank
         return False
 
     def getRankValue(self) -> int:
