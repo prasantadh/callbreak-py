@@ -10,5 +10,10 @@ class Testing(unittest.TestCase):
             else:
                 assert(str(rank) == ['J', 'Q', 'K', 'A'][rank.value - 11])
 
+    def test_rank_compare(self):
+        assert(Rank.Ekka == Rank.Ekka)
+        assert(Rank.Ekka > Rank.Badshah)
+        assert(Rank.Badshah < Rank.Ekka)
+
 if __name__ == '__main__':
     unittest.main()
