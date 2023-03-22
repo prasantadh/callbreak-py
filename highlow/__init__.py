@@ -1,7 +1,9 @@
 from highlow.HighLow import HighLow
+from highlow.schema import call_schema
 
 import os
 from flask import Flask, request
+import jsonschema
 
 def create_app(test_config=None):
 
@@ -21,8 +23,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
-    game = HighLow()
+    game = None
 
     @app.route('/new', methods=['GET'])
     def new():
@@ -40,6 +41,7 @@ def create_app(test_config=None):
                     "reason" : "server side failure. contact the developers."
                 }
             }
+        print(game.peek_next_card())
         return {
             "result" : "success",
             "data" : {
@@ -51,33 +53,34 @@ def create_app(test_config=None):
     @app.route('/call', methods=['POST'])
     def call():
         global game
-        # TODO: insert exception check here
-        data = request.get_json()['data']['guess']
-        print(data)
+        if not game or not game.isOn:
+            return {
+                'result' : 'failure',
+                'data' : {
+                    'reason' : "game isn't initialized. request a /new game"
+                }
+            }
 
-        # TODO: check if there is a running game
-        # if there is then...
-        if data != 'high' and data != 'low':
+        try:
+            incoming = request.get_json()
+            jsonschema.validate(incoming, call_schema)
+        except Exception as E:
             return {
                 'result' : 'failure',
                 'data' : {
-                    'reason' : 'invalid call value (allowed: high/low)'
+                    'reason' : 'received invalid data format'
                 }
             }
-        result = game.call(data)
-        if result:
-            return {
-                'result' : 'success',
-                'data' : {
-                    'card' : str(game.deal()),
-                    'score': game.score
-                }
+        guess = incoming['data']['guess']
+
+        result = game.call(guess)
+        card = game.deal()
+        print(game.peek_next_card())
+        return {
+            'result' : 'success',
+            'data' : {
+                'card' : str(card),
+                'score': game.score
             }
-        else:
-            return {
-                'result' : 'failure',
-                'data' : {
-                    'reason' : 'failed!'
-                }
-            }
+        }
     return app
