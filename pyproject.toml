@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "callbreak_triad"
+version = "0.0.1"
+authors = [
+    { name="Aashish Tripathee", email="placeholder@cbtriad.com" },
+    { name="Prasant Adhikari",  email="placeholder@cbtriad.com" }
+]
+description = "CallBreak, Nepali Style"
+readme = "README.md"
+requires-python  = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/prasantadh/callbreak"
+"Bug Tracker" = "https://github.com/prasantadh/callbreak/issues"
