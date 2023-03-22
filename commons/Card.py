@@ -25,7 +25,7 @@ class Card:
         Returns:
             TYPE: String showing suit and rank. Example, ♠ 4.
         """
-        return "{}{}".format(self.suit, self.rank)
+        return "{} {}".format(self.suit, self.rank)
 
     def __lt__(self, otherCard) -> bool:
         """
@@ -39,6 +39,11 @@ class Card:
             Bool: Returns true if the rank of the other card
             is less than the rank of the current card.
         """
+        if self.suit < otherCard.suit: 
+            return True
+        
+        
+
         return self.getRankValue() < otherCard.getRankValue()
 
     def __eq__(self, otherCard) -> bool:

@@ -22,6 +22,7 @@ class Deck:
             for rank in Rank:
                 self.cards.append(Card(suit, rank))
         self.shuffle()
+        self.last = -1
 
     def shuffle(self):
         """
@@ -57,7 +58,8 @@ class Deck:
         Returns:
             _description_
         """
-        return self.cards.pop()
+        self.last -= 1
+        return self.cards[self.last + 1]
 
     def sort(self):
         """
@@ -70,6 +72,14 @@ class Deck:
 
     def empty(self):
         return len(self.cards) == 0
+
+    def top(self):
+        return self.cards[self.last]
+    
+    def last_top(self):
+        # TODO: exception if the last top is out of bounds
+        # for now works for the high low game
+        return self.cards[self.last + 1]
 
 if __name__ == '__main__':
     deck = Deck()

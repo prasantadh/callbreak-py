@@ -33,14 +33,22 @@ class Suit(Enum):
         Returns:
             _description_
         """
-        return self.value < other.value
+        if self.value == self.Hukum and other.value != self.Hukum:
+            return False
+        if self.value != self.Hukum and other.value == self.Hukum:
+            return True
+        # this part means the a < b and b < a can both return False
+        # if they are both not Hukum. this is because in the game,
+        # the first card to be played is greater. 
+        # keep this in mind when comparing cards later
+        return False
+    
+    def __eq__(self, other) -> bool:
+        if self.value == other.value:
+            return True
 
     def __repr__(self) -> str:
         return self.value
 
     def __str__(self) -> str:
         return self.__repr__()
-
-if __name__ == '__main__':
-    for suit in Suit:
-        print(suit)
