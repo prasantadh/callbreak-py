@@ -9,7 +9,7 @@ flask --app highlow --debug run
 python3 play.py highlow
 
 ## run a test
-python -m unittest test.commons.test_card
+python -m unittest discover test
 ```
 
 Consult the `highlow/api.md` for the api on playing callbreak.
