@@ -9,3 +9,4 @@ python-xlib==0.33
 requests
 rich==13.2.0
 six==1.16.0
+validators
