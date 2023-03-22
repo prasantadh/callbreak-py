@@ -1,3 +1,4 @@
+# API
 `/new`
 - request without additional data
 - response is
