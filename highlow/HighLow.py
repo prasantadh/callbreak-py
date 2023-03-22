@@ -12,6 +12,7 @@ class HighLow:
     def new(self):
         self.deck = Deck()
         self.isOn = True
+        self.score = 0
         return self.deck.deal()
 
     def peek_next_card(self):
@@ -20,14 +21,19 @@ class HighLow:
     def last_dealt(self):
         return self.deck.last_top()
 
+    # returns true for correct guess
+    # false otherwise
     def call(self, guess):
-        if guess == 'high' and self.peek_next_card() > self.last_dealt():
+        print(self.last_dealt(), self.peek_next_card(), self.last_dealt() > self.peek_next_card())
+        print(self.last_dealt(), self.peek_next_card(), self.last_dealt() < self.peek_next_card())
+        if guess == 'high' and self.last_dealt() < self.peek_next_card():
             self.score += 1
             return True
-        if guess == 'low' and self.peek_next_card() < self.last_dealt():
+        if guess == 'low' and self.last_dealt() > self.peek_next_card():
             self.score += 1
             return True
 
+        self.isOn = False
         return False
     
     def deal(self):

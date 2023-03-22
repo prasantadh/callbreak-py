@@ -74,10 +74,20 @@ def create_app(test_config=None):
         result = game.call(guess)
         card = game.deal()
         app.logger.info(game.peek_next_card())
+        
+        if result:
+            return {
+                'result' : 'correct',
+                'data' : {
+                    'card' : str(card),
+                    'score': game.score
+                }
+            }
+
         return {
-            'result' : 'success',
+            'result' : 'incorrect',
             'data' : {
-                'card' : str(card),
+                'card' : str(game.peek_next_card()),
                 'score': game.score
             }
         }

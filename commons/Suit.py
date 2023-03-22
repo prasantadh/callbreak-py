@@ -33,17 +33,16 @@ class Suit(Enum):
         Returns:
             _description_
         """
-        if self.value == self.Hukum.value and other.value != self.Hukum.value:
-            return False
-        if self.value != self.Hukum.value and other.value == self.Hukum.value:
+        if self.value != other.value and other.value == self.Hukum.value:
             return True
-        # this part means the order of comparison matters
-        # if both the suits aren't Hukum, the first card
-        # that was dropped wins
         return False
 
     def __gt__(self, other) -> bool:
-        return not self < other
+        if self.value == other.value:
+            return False
+        if other.value == self.Hukum.value:
+            return False
+        return True
     
     def __eq__(self, other) -> bool:
         if self.value == other.value:

@@ -27,14 +27,22 @@ class Client:
         self.score = 0
         
     def parse_response(self, response):
+        # print(response.text)
         response = json.loads(response.text)
         if response['result'] == 'failure':
             print('Server reported error: {}'.format(response['data']['reason']))
-            return False
+            exit()
+
 
         self.score = response['data']['score']
         suit = get_suit(response['data']['card'][0])
         rank = get_rank(response['data']['card'][2:])
+
+        if response['result'] == 'incorrect':
+            self.cards.append(Card(suit=suit, rank=rank))
+            print(self)
+            print('Oops! You lost!')
+            exit()
         return suit, rank
 
     def new(self) -> bool:

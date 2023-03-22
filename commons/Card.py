@@ -41,11 +41,13 @@ class Card:
         """
         if self.suit == otherCard.suit: 
             return self.rank < otherCard.rank
+        return self.suit < otherCard.suit
 
-        return False
-    
     def __gt__(self, otherCard) -> bool:
-        return not self < otherCard
+        if self.suit == otherCard.suit:
+            return self.rank > otherCard.rank
+        return self.suit > otherCard.suit
+
 
     def __eq__(self, otherCard) -> bool:
         """
