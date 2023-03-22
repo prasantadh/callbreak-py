@@ -26,6 +26,17 @@ class Client:
         self.server = server
         self.score = 0
         
+    def parse_response(self, response):
+        response = json.loads(response.text)
+        if response['result'] == 'failure':
+            print('Server reported error: {}'.format(response['data']['reason']))
+            return False
+
+        self.score = response['data']['score']
+        suit = get_suit(response['data']['card'][0])
+        rank = get_rank(response['data']['card'][2:])
+        return suit, rank
+
     def new(self) -> bool:
         try:
             response = requests.get(self.server + '/new')
@@ -33,24 +44,19 @@ class Client:
             print(E)
             print("Fatal Error: Couldn't establish connection with the server!")
             exit()
-        
-        response = json.loads(response.text)
-        if response['result'] == 'failure':
-            print('Server reported error: {}'.format(response['data']['reason']))
-            return False
 
-        self.score = response['data']['score']
-        
-        suit = get_suit(response['data']['card'][0])
-        rank = get_rank(response['data']['card'][1:])
+        suit, rank = self.parse_response(response)
         self.cards.append(Card(suit=suit, rank=rank))
     
     def __repr__(self) -> str:
-        return ''.join(str(card) + '\n' for card in self.cards)
+        s = ''.join(str(card) + '\n' for card in self.cards)
+        s += 'score: {}'.format(self.score)
+        return s
 
     def send(self, value):
         payload = {'data' : {'guess' : 'high'} }
         response = requests.post(self.server + '/call', json=payload)
+        return response
         
     def run(self):
         self.new()
@@ -58,8 +64,10 @@ class Client:
         for i in range(51):
             guess = input('High [H/h: default] or Low [l]? ')
             if guess.lower() in ['h', 'high', '']:
-                self.send('high')
+                response = self.send('high')
             else:
-                self.send('low')
+                response = self.send('low')
+            suit, rank = self.parse_response(response)
+            self.cards.append(Card(suit, rank))
             print('-'*20)
             print(self)

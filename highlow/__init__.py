@@ -22,7 +22,7 @@ def create_app(test_config=None):
         pass
 
 
-    game = None
+    game = HighLow()
 
     @app.route('/new', methods=['GET'])
     def new():
@@ -54,6 +54,9 @@ def create_app(test_config=None):
         # TODO: insert exception check here
         data = request.get_json()['data']['guess']
         print(data)
+
+        # TODO: check if there is a running game
+        # if there is then...
         if data != 'high' and data != 'low':
             return {
                 'result' : 'failure',
@@ -66,7 +69,7 @@ def create_app(test_config=None):
             return {
                 'result' : 'success',
                 'data' : {
-                    'card' : game.deal(),
+                    'card' : str(game.deal()),
                     'score': game.score
                 }
             }
