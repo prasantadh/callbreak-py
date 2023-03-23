@@ -62,7 +62,7 @@ class Client:
         return s
 
     def send(self, value):
-        payload = {'data' : {'guess' : 'high'} }
+        payload = {'data' : {'guess' : value} }
         response = requests.post(self.server + '/call', json=payload)
         return response
         

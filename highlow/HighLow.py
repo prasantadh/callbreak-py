@@ -24,6 +24,7 @@ class HighLow:
     # returns true for correct guess
     # false otherwise
     def call(self, guess):
+        print(guess)
         print(self.last_dealt(), self.peek_next_card(), self.last_dealt() > self.peek_next_card())
         print(self.last_dealt(), self.peek_next_card(), self.last_dealt() < self.peek_next_card())
         if guess == 'high' and self.last_dealt() < self.peek_next_card():

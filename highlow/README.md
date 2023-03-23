@@ -46,7 +46,12 @@ Upon success, player's score is incremented. The response will reflect the updat
 
 - response is
 ```json 
-    { "result" : "success", 
+    { "result" : "correct", 
+        "data" : { 
+            "card"  : "<suit><rank>",
+            "score" : "<value>"}
+    }
+    { "result" : "incorrect", 
         "data" : { 
             "card"  : "<suit><rank>",
             "score" : "<value>"}
@@ -58,3 +63,5 @@ Upon success, player's score is incremented. The response will reflect the updat
         }
     }
 ```
+After an incorrect verdict, the game is over.
+A /new round has to be requested.

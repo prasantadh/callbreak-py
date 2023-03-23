@@ -72,6 +72,7 @@ def create_app(test_config=None):
         guess = incoming['data']['guess']
 
         result = game.call(guess)
+        print(result)
         card = game.deal()
         app.logger.info(game.peek_next_card())
         
