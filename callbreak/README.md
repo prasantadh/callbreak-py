@@ -1,3 +1,47 @@
+#Rules
+
+## Objective of the Game
+Be the player with the highest score at the end of the game.
+
+## Generics
+- The game is played with a standard deck of 52 cards.
+- A game is played for 5 rounds with 4 players.
+- The game proceeds clockwise at all times.
+- A call is the estimated number of tricks you will win. You make
+this estimate after you have seen your cards and before each round starts.
+- Each player gets 13 cards at the start of the game and hence,
+a round is a collection of 13 tricks.
+
+```txt
+Glossary:
+Hand: The cards that a player has.
+Trick: A collection of 4 cards played face up from each player.
+
+In Nepali, these would both be called _haat_.
+```
+
+## Game Play
+- The dealer deals all the cards starting with the person immediately
+to her left.
+- Eldest Hand (the player who was given the first card) of the round
+calls first.  Others call clockwise. Eldest Hand plays first card of 
+the first trick in each round.
+- In a trick, the trump suit wins all other suits. You can only play
+a trump suit card if you are the first to play on a trick or if you
+are out of the suit that was the first card played on current trick.
+- In absence of trump cards, the first suit in a trick is the
+winning suit for that trick.
+- If you have a card that is greater than any card played in the
+trick so far, you must play that card.
+- The player to win the trick, starts the next trick.
+
+## Termination
+- Each extra trick won will give you .1 points.
+If estimated number of tricks aren't won, you get a negative of the
+estimation for that round.
+- After 5 rounds, the score is totalled. The player with the highest
+score wins.
+
 # API
 
 This document details the API interactions between the game server
