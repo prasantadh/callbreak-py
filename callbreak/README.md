@@ -1,4 +1,4 @@
-#Rules
+# Rules
 
 ## Objective of the Game
 Be the player with the highest score at the end of the game.
