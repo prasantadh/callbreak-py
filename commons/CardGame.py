@@ -1,6 +1,6 @@
-from callbreak.commons.Deck import Deck
-from callbreak.commons.Player import Player
-from Renderer import Renderer
+from commons.Deck import Deck
+from commons.Player import Player
+# from Renderer import Renderer
 
 
 class CardGame:
@@ -26,7 +26,7 @@ class CardGame:
         self.minPlayersAllowed = 1
         self.numberOfRounds = numberOfRounds
         self.deck = Deck()
-        self.renderer = Renderer()
+        # self.renderer = Renderer()
 
     def addPlayer(self, player: Player):
         """
@@ -54,9 +54,9 @@ class CardGame:
 
     def render(self, server_address: str=""):
         print("Rendering")
-        self.renderer.update_players(self.players)
+        # self.renderer.update_players(self.players)
         # self.renderer.render_call_break()
-        self.renderer.render_live(server_address)
+        # self.renderer.render_live(server_address)
 
     def status(self):
         pass

@@ -1,9 +1,9 @@
-from callbreak.commons.Card import Card
-from callbreak.commons.Hand import Hand
+from commons.Card import Card
+from commons.Hand import Hand
 
 
 class Player:
-    def __init__(self, name: str):
+    def __init__(self, name: str, game):
         """
         __init__ _summary_
 
@@ -17,6 +17,17 @@ class Player:
         self.score = 0
         self.cards = []
         self.soft_wrap = True
+        self.calls = [] * 5
+        self.game = game
+
+    @property 
+    def calls(self):
+        return self._calls
+
+    @calls.setter
+    def calls(self, value):
+        self._calls[self.game.get_round()] = value
+
 
     def __str__(self) -> str:
         """
