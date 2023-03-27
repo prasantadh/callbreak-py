@@ -1,9 +1,9 @@
 from commons.Deck import Deck
 from commons.Player import Player
-# from Renderer import Renderer
 
+from commons.exceptions.CallbreakExceptions import TooManyPlayersError
 
-class CardGame:
+class CardGame(object):
     """
      _summary_
 
@@ -20,26 +20,47 @@ class CardGame:
             name -- _description_ (default: {'generic'})
         """
         self.name = name
-        self.players = []   # TODO: Assume self.players[0] one is always self?
-        self.numberOfPlayers = 1
-        self.maxPlayersAllowed = 4
+        self.totalRoundsToPlay = 5
+        self._scores = [] 
+        self._current_round = 0
+        self._players = []
         self.minPlayersAllowed = 1
-        self.numberOfRounds = numberOfRounds
-        self.deck = Deck()
-        # self.renderer = Renderer()
+    
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        self._name = value
+    
+    @property
+    def players(self):
+        return self._players
+
+    @property
+    def scores(self):
+        return self._scores
+    
+    @property
+    def calls(self):
+        return self._calls
 
     def addPlayer(self, player: Player):
-        """
-        addPlayer _summary_
+        id = len(self.players)
+        if id >= self.maxPlayersAllowed:
+            raise TooManyPlayersError
 
-        _extended_summary_
+        print(id, len(self.calls), len(self.scores))
+        player.id = len(self._players)
 
-        Arguments:
-            player -- _description_
-        """
-        if (len(self.players)) == self.maxPlayersAllowed:
-            return False
-        self.players.append(player)
+        self._scores.append([])
+        player.scores = self.scores[id]
+
+        self._calls.append([])
+        player.calls = self.calls[id]
+
+        self._players.append(player)
 
     def __str__(self):
         """
@@ -51,17 +72,3 @@ class CardGame:
             _description_
         """
         return 'The {} game is on!'.format(self.name)
-
-    def render(self, server_address: str=""):
-        print("Rendering")
-        # self.renderer.update_players(self.players)
-        # self.renderer.render_call_break()
-        # self.renderer.render_live(server_address)
-
-    def status(self):
-        pass
-
-
-if __name__ == '__main__':
-    game = CardGame()
-    print(game)

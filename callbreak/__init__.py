@@ -1,10 +1,31 @@
 from callbreak.CallBreak import CallBreak
 from commons.Player import Player
 
+from commons.exceptions.CallbreakExceptions import GameIsNotOnError
+
 import os
 from flask import Flask
 
 game = CallBreak()
+
+def respond_failure(err):
+    return {
+        'result' : 'failure',
+        'data' : {
+            'reason' : str(err)
+        }
+    }
+
+def respond_success():
+    return {
+        'result' : 'success',
+        'data' : {
+            'players' : game.player_names,
+            'calls' : game.calls,
+            'scores' : game.scores
+        }
+    }
+
 def create_app(test_config=None):
 
     app = Flask(__name__, instance_relative_config=True)
@@ -27,43 +48,41 @@ def create_app(test_config=None):
     @app.route('/status')
     def status():
         global game
-        try:
-            return game.status()
-        except Exception as err:
-            app.logger.error(err)
-            return { 
-                'result' : 'failure', 
-                'data' : {
-                    'reason' : 'Failure retrieving status'
-                }
-            }
+        if not game.isOn:
+            return game.respond_failure('No running game! Request a /new game.')
+        
+        return game.respond_success()
+
 
     @app.route('/new/<name>', methods=['GET'])
     def new(name):
         global game
         try:
-            game = CallBreak()
-            game.addPlayer(Player(name), game)
-            game.addPlayer(Player('1'), game)
-            game.addPlayer(Player('2'), game)
-            game.addPlayer(Player('3'), game)
-            app.logger.info(game.status())
+            game.new()
+            game.addPlayer(Player(name, game))
+            game.addPlayer(Player('1', game))
+            game.addPlayer(Player('2', game))
+            game.addPlayer(Player('3', game))
 
         except Exception as err:
             app.logger.error(err)
-            game.respond_failure(err)
+            return respond_failure(err)
 
-        return game.respond_success()
+        return respond_success()
     
     @app.route('/call', methods=['POST'])
     def call():
         global game
         try:
-            for player in game.get_players()[1:]:
-                player.set_calls(1)
+            if not game or not game.isOn:
+                raise GameIsNotOnError
+            for player in game.players:
+                player.call(1)
         except Exception as err:
-            app.logger.err(err)
-            game.respond_failure(err)
+            app.logger.error(err)
+            respond_failure(err)
+        
+        return respond_success()
         
 
     return app

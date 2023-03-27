@@ -13,31 +13,45 @@ class Player:
             name -- _description_
         """
         self.name = name
-        self.hand = Hand()
-        self.score = 0
+        self.id = 0
         self.cards = []
         self.soft_wrap = True
-        self.calls = [] * 5
         self.game = game
+        self._scores = []
+        self._calls = []
+    
+    @property
+    def id(self) -> int:
+        return self._id
+    
+    @id.setter
+    def id(self, value: int) -> None:
+        self._id = value
+
+    def call(self, value):
+        self._calls.append(value)
 
     @property 
     def calls(self):
         return self._calls
-
+    
     @calls.setter
     def calls(self, value):
-        self._calls[self.game.get_round()] = value
+        self._calls = value
+    
+    def score(self, value):
+        return self._scores.append(value)
+    
+    @property
+    def scores(self, value):
+        return self._scores
+
+    @scores.setter
+    def scores(self, value):
+        self._scores = value
 
 
     def __str__(self) -> str:
-        """
-        __str__ _summary_
-
-        _extended_summary_
-
-        Returns:
-            _description_
-        """
         return "{} : {}".format(self.name, self.cards)
 
     def addCard(self, card: Card):

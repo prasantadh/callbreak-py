@@ -6,56 +6,29 @@ class CallBreak(CardGame):
 
     def __init__(self):
         super().__init__(name='CallBreak')
-        self.totalRound = 5
-        self.round = 0
         self.maxPlayersAllowed = 4
         self.minPlayersAllowed = 4
-        self.numberOfPlayers = 0
+        self._numberOfPlayers = 0
         self.isOn = False
+        self._calls = []
 
 
     def new(self):
         self.isOn = True
+        self._current_round = 0
+        self._numberOfPlayers = 0
+        self._players = []
         # code to initialize the new game
     
     @property
-    def round(self):
-        return self._round
+    def current_round(self):
+        return self.current_round
     
-    @round.setter
-    def round(self, value):
-        self._round = value
-    
+    @current_round.setter
+    def current_round(self, value):
+        self.current_round = value
 
-    def play(self):
-        if len(self.players) != self.minPlayersAllowed:
-            return False
 
-        while not self.deck.empty():
-            for player in self.players:
-                player.addCard(self.deck.deal())
-
-    def status(self):
-
-        current_hand = ([str(c) for c in self.players[0].cards])
-
-        status = { 'data' :
-                    { 'hand' : json.dumps(current_hand) }
-                  }
-        return status
-
-    def respond_success(self):
-        return {
-            'result' : 'success',
-            'data' : {
-                'hello'
-            }
-        }
-    
-    def respond_failure(self, message):
-        return {
-            'result' : 'failure',
-            'data' : {
-                'reason' : message
-            }
-        }
+    @property
+    def player_names(self):
+        return [player.name for player in self.players]
