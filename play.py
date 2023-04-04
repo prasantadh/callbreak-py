@@ -1,4 +1,5 @@
 from highlow.Client import Client as HighLowClient
+from callbreak.BasicClient import Client as CallBreakClient
 import validators
 
 import argparse
@@ -26,4 +27,6 @@ if args.game == 'highlow':
     client = HighLowClient(args.url)
     client.run()
 
-
+elif args.game == 'callbreak':
+    client = CallBreakClient(args.url)
+    client.run()
