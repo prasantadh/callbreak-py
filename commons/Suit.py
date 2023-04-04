@@ -17,9 +17,9 @@ class Suit(Enum):
     """
 
     Hukum = '♠'
+    Paan = '♥'
     Chidi = '♣'
     Itta = '♦'
-    Paan = '♥'
 
     def __lt__(self, other) -> bool:
         """

@@ -1,3 +1,4 @@
+from commons.Card import Card
 from commons.Deck import Deck
 from commons.Player import Player
 
@@ -22,9 +23,12 @@ class CardGame(object):
         self.name = name
         self.totalRoundsToPlay = 5
         self._scores = [] 
-        self._current_round = 0
+        self._currentRound = 0
         self._players = []
         self.minPlayersAllowed = 1
+        self._calls = []
+        self._hands = []
+        self._scores = []
     
     @property
     def name(self):
@@ -46,21 +50,36 @@ class CardGame(object):
     def calls(self):
         return self._calls
 
+    @property
+    def currentRound(self):
+        return self._currentRound
+
+
     def addPlayer(self, player: Player):
         id = len(self.players)
         if id >= self.maxPlayersAllowed:
             raise TooManyPlayersError
 
-        print(id, len(self.calls), len(self.scores))
         player.id = len(self._players)
-
-        self._scores.append([])
-        player.scores = self.scores[id]
 
         self._calls.append([])
         player.calls = self.calls[id]
 
+        self._hands.append([])
+        player.hands = self._hands[id]
+
+        self._scores.append([])
+        player.scores = self.scores[id]
+
         self._players.append(player)
+        
+        if len(self.players) == 4:
+            self.deal()
+
+
+    def deal(self):
+        pass
+
 
     def __str__(self):
         """

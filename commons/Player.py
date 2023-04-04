@@ -17,8 +17,9 @@ class Player:
         self.cards = []
         self.soft_wrap = True
         self.game = game
+        self._cards = []
+        self._hands = []
         self._scores = []
-        self._calls = []
     
     @property
     def id(self) -> int:
@@ -28,9 +29,12 @@ class Player:
     def id(self, value: int) -> None:
         self._id = value
 
-    def call(self, value):
+    # make a call() for the round
+    def call(self, value: int):
         self._calls.append(value)
 
+    # _calls is an array that has the player's calls
+    # indexed by round 0-4 
     @property 
     def calls(self):
         return self._calls
@@ -39,9 +43,14 @@ class Player:
     def calls(self, value):
         self._calls = value
     
+    # player just scored a Trick
     def score(self, value):
-        return self._scores.append(value)
+        if len(self._scores) <= self.game.current_round:
+            self._scores.append(0)
+        self._scores[-1] += 1
     
+    # _scores is an array that has the player's scores
+    # indexed by round 0-4
     @property
     def scores(self, value):
         return self._scores
@@ -54,16 +63,18 @@ class Player:
     def __str__(self) -> str:
         return "{} : {}".format(self.name, self.cards)
 
-    def addCard(self, card: Card):
-        """
-        addCard _summary_
+    def buy(self, card: Card) -> None:
+        if len(self.hands) == self.game.currentRound:
+            self._hands.append(Hand())
+        self._hands[-1].add(card)
+    
+    @property
+    def hands(self):
+        return self._hands
 
-        _extended_summary_
-
-        Arguments:
-            card -- _description_
-        """
-        self.cards.append(card)
+    @hands.setter
+    def hands(self, value):
+        self._hands = value
 
     def getNumberOfRemainingCards(self) -> bool:
         """
@@ -75,40 +86,6 @@ class Player:
             Numbre of cards that haven't been played yet.
         """
         return sum([not card.played for card in self.cards])
-
-    def setHand(self, hand: Hand):
-        """
-        setHand _summary_
-
-        _extended_summary_
-
-        Arguments:
-            hand -- _description_
-        """
-        self.hand = hand
-
-    def getHand(self) -> Hand:
-        """
-        getHand _summary_
-
-        _extended_summary_
-
-        Returns:
-            _description_
-        """
-        return self.hand
-
-    def getCards(self):
-        """
-        getCards _summary_
-
-        _extended_summary_
-
-        Returns:
-            _description_
-        """
-        return self.cards
-
 
     def getCardFromIndex(self, index: int) -> Card:
         """
@@ -133,4 +110,6 @@ class Player:
         Keyword Arguments:
             ascending -- _description_ (default: {True})
         """
-        self.cards = sorted([card for card in self.cards if not card.played], key=lambda card: (card.suit.value, card.rank.value), reverse=not ascending)
+        self.cards = sorted([card for card in self.cards if not card.played], 
+                            key=lambda card: (card.suit.value, card.rank.value), 
+                            reverse=not ascending)

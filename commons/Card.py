@@ -9,11 +9,20 @@ class Card:
             suit -- Card's suit (Hukkum, Paan, ...)
             rank -- Card's rank (A, 2, 3, ...)
         """
-        self.suit = suit
-        self.rank = rank
+        self._suit = suit
+        self._rank = rank
 
         self.faceRanks = {'A': 14, 'K': 13, 'Q': 12, 'J': 11}
         self.played = False
+
+    @property
+    def suit(self):
+        return self._suit
+
+    
+    @property
+    def rank(self):
+        return self._rank
 
     def __str__(self) -> str:
         return self.__repr__()
@@ -77,25 +86,3 @@ class Card:
         else:
             return int(self.rank)
 
-
-    def get_suit(self) -> Suit:
-        """
-        get_suit _summary_
-
-        _extended_summary_
-
-        Returns:
-            _description_
-        """
-        return self.suit
-
-    def get_rank(self) -> Rank:
-        """
-        get_rank _summary_
-
-        _extended_summary_
-
-        Returns:
-            _description_
-        """
-        return self.rank

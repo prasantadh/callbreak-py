@@ -71,7 +71,7 @@ class Deck:
                             reverse=True)
 
     def empty(self):
-        return len(self.cards) == 0
+        return self.last < -52
 
     def top(self):
         return self.cards[self.last]
