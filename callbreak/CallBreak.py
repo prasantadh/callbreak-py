@@ -31,9 +31,3 @@ class CallBreak(CardGame):
                     { 'hand' : json.dumps(current_hand) }
                   }
         return status
-
-if __name__ == '__main__':
-    game = CallBreak()
-    game.play()
-    print(game.status())
-    print(game)

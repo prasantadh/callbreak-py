@@ -1,5 +1,5 @@
 from callbreak.CallBreak import CallBreak
-from callbreak.commons.Player import Player
+from commons.Player import Player
 
 
 import logging
