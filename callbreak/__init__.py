@@ -4,7 +4,7 @@ from commons.Player import Player
 from commons.exceptions.CallbreakExceptions import GameIsNotOnError
 
 import os
-from flask import Flask
+from flask import Flask, request
 
 game = CallBreak()
 
@@ -22,7 +22,8 @@ def respond_success():
         'data' : {
             'players' : game.player_names,
             'calls' : game.calls,
-            'scores' : game.scores
+            'scores' : game.scores,
+            'cards' : str(game.players[0].hands[-1])
         }
     }
 
@@ -45,13 +46,25 @@ def create_app(test_config=None):
         pass
 
 
-    @app.route('/status')
+    @app.route('/status', methods=['GET'])
     def status():
+        
         global game
+
+
         if not game.isOn:
             return game.respond_failure('No running game! Request a /new game.')
         
-        return game.respond_success()
+        # user_request = request.get_json()
+        # # TODO: validate the format of json that we just received
+
+        # if user_request == {}:
+        #     return game.respond_success()
+        
+        # if user_request['data']['break'] == 0:
+        #     return game.get_hand_of(0)
+
+        return respond_success()
 
 
     @app.route('/new/<name>', methods=['GET'])
@@ -68,15 +81,18 @@ def create_app(test_config=None):
             app.logger.error(err)
             return respond_failure(err)
 
-        return respond_success()
+        # return respond_success()
+        return {'result' : 'success'}
     
-    @app.route('/call', methods=['POST'])
-    def call():
+    @app.route('/call/<tricks>', methods=['GET'])
+    def call(tricks):
         global game
+        tricks = int(tricks)
         try:
             if not game or not game.isOn:
                 raise GameIsNotOnError
-            for player in game.players:
+            game.players[0].call(tricks)
+            for player in game.players[1:]:
                 player.call(1)
         except Exception as err:
             app.logger.error(err)
