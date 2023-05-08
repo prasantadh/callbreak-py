@@ -48,19 +48,19 @@ def create_app(test_config=None):
 
     @app.route('/status', methods=['GET'])
     def status():
-        
+
         global game
 
 
         if not game.isOn:
             return game.respond_failure('No running game! Request a /new game.')
-        
+
         # user_request = request.get_json()
         # # TODO: validate the format of json that we just received
 
         # if user_request == {}:
         #     return game.respond_success()
-        
+
         # if user_request['data']['break'] == 0:
         #     return game.get_hand_of(0)
 
@@ -83,7 +83,7 @@ def create_app(test_config=None):
 
         # return respond_success()
         return {'result' : 'success'}
-    
+
     @app.route('/call/<tricks>', methods=['GET'])
     def call(tricks):
         global game
@@ -97,8 +97,11 @@ def create_app(test_config=None):
         except Exception as err:
             app.logger.error(err)
             respond_failure(err)
-        
+
         return respond_success()
-        
+
+    @app.route('/test', methods=['GET'])
+    def test():
+        return {'test' : 'pass'}
 
     return app

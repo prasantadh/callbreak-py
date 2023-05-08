@@ -80,7 +80,3 @@ class Deck:
         # TODO: exception if the last top is out of bounds
         # for now works for the high low game
         return self.cards[self.last + 1]
-
-if __name__ == '__main__':
-    deck = Deck()
-    print(deck)
