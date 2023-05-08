@@ -13,6 +13,11 @@ class Testing(unittest.TestCase):
         print(response.text)
         assert(True)
 
+    def test_get_status(self):
+        response = self.app.get('/new/prasant')
+        response = self.app.get('/status')
+        assert(True)
+
 
 if __name__ == '__main__':
     unittest.main()
