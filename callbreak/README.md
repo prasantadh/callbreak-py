@@ -25,7 +25,9 @@ In Nepali, these would both be called _haat_.
 to her left.
 - Eldest Hand (the player who was given the first card) of the round
 calls first.  Others call clockwise. Eldest Hand plays first card of 
-the first trick in each round.
+the first trick in each round. In the next round, the dealer is clockwise
+next player to dealer for the current round. Eldest Hand for that round
+goes first in that round.
 - In a trick, the trump suit wins all other suits. You can only play
 a trump suit card if you are the first to play on a trick or if you
 are out of the suit that was the first card played on current trick.
